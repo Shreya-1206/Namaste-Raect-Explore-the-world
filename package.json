@@ -1,0 +1,25 @@
+{
+  "name": "food-app",
+  "version": "1.0.0",
+  "description": "Food App",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest "
+  },
+  "keywords": [
+    "Nasmaste",
+    "Gastronomy"
+  ],
+  "author": "Shreya Ray",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
