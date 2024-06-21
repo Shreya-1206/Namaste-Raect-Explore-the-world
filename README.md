@@ -56,3 +56,9 @@ Good error handling
 - React uses a diff algorithm which comapare the changes of virtual dom (old and new)
   then updates the actual dom. This makes dom manipulation easy ....
 
+
+## useEffect 
+- Normal Js Fucntion
+- takes 2 arrguments (CALLBACK, DEPENDENCY ARRAY)
+- useEffect call back function runs after the first dumby render. for eg to fetch api data
+- hence we can use useEffect if have to render something after the first render.
