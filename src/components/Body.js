@@ -1,9 +1,10 @@
 import ReasturantCard from "./RestuarantCard";
 import { useEffect, useState } from "react";
-import resList from "../utils/mockData";
+import ShimmerUi from "./ShimmerUi";
+
 const Body =() => {    // not gonan use mock data reslist
     //State Variable
-   let [listOfRes, setListOfRes] = useState(resList);
+   let [listOfRes, setListOfRes] = useState([]);
    
    // useEffect() - Normal Function , useEffect Runs After the first render for eg to make an api call
 
@@ -12,19 +13,23 @@ const Body =() => {    // not gonan use mock data reslist
     fetchData();
    }, []);
    
-   const fetchData = async function() {
+   const fetchData = async function() { 
     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.064182016306049&lng=77.74447961587117&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
 
     const json = await data.json();
-    console.log(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+    console.log(json);
     
     // updating the state with the
+
     // setListOfRes(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
-    setListOfRes(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
+    setListOfRes(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
    }
 
  
-
+  //Shimmer UI
+  if(listOfRes.length === 0) {
+    return <ShimmerUi />;
+  }
     //Normal Js Variable 
 //     let listOfRes = [
 //         {
