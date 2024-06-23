@@ -5,7 +5,10 @@ import ShimmerUi from "./ShimmerUi";
 const Body =() => {    // not gonan use mock data reslist
     //State Variable
    let [listOfRes, setListOfRes] = useState([]);
+   let [filterRes, setFilterRes] = useState([]);
+   let [searchRes, setSearchRes] = useState("");
    
+   console.log("Body Rendered")
    // useEffect() - Normal Function , useEffect Runs After the first render for eg to make an api call
 
    useEffect(() => {
@@ -20,16 +23,12 @@ const Body =() => {    // not gonan use mock data reslist
     console.log(json);
     
     // updating the state with the
-
     // setListOfRes(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
     setListOfRes(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
    }
 
  
   //Shimmer UI
-  if(listOfRes.length === 0) {
-    return <ShimmerUi />;
-  }
     //Normal Js Variable 
 //     let listOfRes = [
 //         {
@@ -81,19 +80,38 @@ const Body =() => {    // not gonan use mock data reslist
 //             },        
 //         },
 //    ];
-    return (
+    return listOfRes.length === 0 ? <ShimmerUi /> : 
+    (
       <div className="body">
-        <button className="filter-btn" onClick={
+        <div className ="filter">
+          <input 
+            type ="text" 
+            className = "input-search" 
+            value ={searchRes} onChange={(e) => setSearchRes(e.target.value)}/>
+          <button 
+            className="search-btn"
+            onClick={() => {
+             console.log(searchRes);
+             const search = listOfRes.filter((res) => {
+              return res.info.name.toLowerCase().includes(searchRes.toLowerCase());
+             })
+             setFilterRes(search);
+            }}
+            >Search</button>
+          <button 
+            className="filter-btn" 
+            onClick={
             () => {
                 // console.log("Button Clicked ❣️")
                let filterRes = listOfRes.filter((res) => res.info.avgRating >= 4);
-               setListOfRes(filterRes);
+               setFilterRes(filterRes);
                 console.log(filterRes);
             }
-        }>Top Rated Restaurants</button>
+          }>Top Rated Restaurants</button>
+        </div>
         <div className="res-conatiner">
           {
-            listOfRes.map(resturant => (
+            filterRes.map(resturant => (
               <ReasturantCard key ={resturant.info.id} resData ={resturant}/>
             ))
           }
