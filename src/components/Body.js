@@ -17,14 +17,16 @@ const Body =() => {    // not gonan use mock data reslist
    }, []);
    
    const fetchData = async function() { 
-    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.064182016306049&lng=77.74447961587117&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+    const data = await fetch("https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.064182016306049&lng=77.74447961587117&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
 
     const json = await data.json();
     console.log(json);
     
     // updating the state with the
     // setListOfRes(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
-    setListOfRes(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+    setListOfRes(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilterRes(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    
    }
 
  
